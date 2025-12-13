@@ -37,8 +37,8 @@ function Navbar() {
           <Box sx={{display:'flex', gap:2 }}>
             <Link component={RouterLink} to='/home' color='inherit' underline='none' > home</Link>
             <Link component={RouterLink} to='/cart' color='inherit' underline='none' > cart</Link>
-            <Link component={RouterLink} to='/auth/register'  color='inherit' underline='none'> register</Link>
-            <Link  component={RouterLink} to='/auth/login' color='inherit' underline='none' > login</Link>
+            <Link component={RouterLink} to='/register'  color='inherit' underline='none'> register</Link>
+            <Link  component={RouterLink} to='/login' color='inherit' underline='none' > login</Link>
 
           </Box>
         </Toolbar>

@@ -18,21 +18,21 @@ const router = createBrowserRouter([
       {
         path: "cart",
         element: <Cart />,
-      },
-    ],
-  },
-  {
-    path: "/auth",
-    element: <AuthLayout />,
-    children: [
-      {
+      }, {
         path: "login",
         element: <Login />,
       },
       {
         path: "register",
         element: <Register />,
-      },
+      }
+    ],
+  },
+  {
+    path: "/auth",
+    element: <AuthLayout />,
+    children: [
+     
     ],
   },
 ]);
