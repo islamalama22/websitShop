@@ -1,44 +1,30 @@
-import React from 'react'
-import { Box, TextField, Typography, Button } from '@mui/material' 
-
+import React, { useState } from 'react'
+import { Box, TextField, Typography, Button, CircularProgress } from '@mui/material' 
+ 
 // hooks 
 import { useForm } from 'react-hook-form'
 import axios from 'axios'
-//  validation
-import * as yup from 'yup'
 //  validation 
+import RegisterSchema from '../../validations/RegisterSchema'
+//  to  show the  errors  of schema
 import { yupResolver } from '@hookform/resolvers/yup';
 
 
-//  schema  its for  validation
-//  clint  sid validation
-const schema = yup.object({
-  fullName: yup.string().required('Full name is required'),
-  email: yup.string().email('Invalid email').required('Email is required'),
-  username: yup
-    .string()
-    .min(4, 'Username must be at least 4 characters')
-    .matches(/^[a-zA-Z0-9._-]+$/, 'Invalid username')
-    .required('Username is required'),
-  phoneNumber: yup.string().required('Phone number is required'),
-  password: yup
-    .string()
-    .min(8, 'Password must be at least 8 characters')
-    .matches(/[A-Z]/, 'Must contain at least one uppercase letter')
-    .matches(/[a-z]/, 'Must contain at least one lowercase letter')
-    .matches(/[0-9]/, 'Must contain at least one number')
-    .matches(/[@#$&?!]/, 'Must contain at least one special character')
-    .required('Password is required'),
-});
+
+
 
 
 function Register() {
+  //  errors from  the  backend like  the  id  is  taken  and  username  is taken  
+  const [serverError,setServerErrors]=useState([]);
+
+
   //  form  hook  used  in input  and  halp  to  do  validtion
   //  resolver  its  in  each  send to  values  chaek  the  values 
   // resolver  ://  it  will  provent  the  clinet  to  send  requst  befor  chaek  the  inputs
 
-  const { register, handleSubmit ,formState:{errors} } = useForm({
-    resolver:yupResolver(schema),
+  const { register, handleSubmit ,formState:{errors,isSubmitting} } = useForm({
+    resolver:yupResolver(RegisterSchema),
     // to  show the  error  in the  bulre
     mode:"onBlur"
   });
@@ -51,12 +37,17 @@ function Register() {
       console.log(response);
     } catch (err) {
     console.log(err)
+    setServerErrors(err.response.data.errors);
     }
 
   }
   return (
     <Box className="register-form">
       <Typography variant='' > register  page</Typography>
+
+      {serverError.length>0 ?  serverError.map((err)=>{
+         <Typography> {err}</Typography>
+      }) :null}
 
       <Box onSubmit={handleSubmit(registerForm)} component={"form"} sx={{ display: 'flex', flexDirection: "column", gap: 3, mt: 5, alignItems: "flex-start" }} >
         <TextField {...register('userName')} label="user name" fullWidth variant='outlined' 
@@ -74,7 +65,10 @@ function Register() {
         error={errors.phoneNumber} helperText={errors.phoneNumber?.message}
         />
 
-        <Button variant="contained" type="submit">Register</Button>
+        <Button variant="contained" type="submit" disabled={isSubmitting}>
+          {isSubmitting ? <CircularProgress /> :'register'}
+          
+        </Button>
 
       </Box>
 
