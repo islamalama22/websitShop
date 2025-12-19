@@ -2,13 +2,18 @@ import React from "react";
 // hooks
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { Box, Typography, TextField, Button } from "@mui/material";
+import { Box, Typography, TextField, Button, Link } from "@mui/material";
+import RestPassword from "../resetPassword/RestPassword";
+//  the  Linke of  routing 
+import {Link as RouterLink} from 'react-router-dom'
+
+
 
 function Login() {
   //  form  hook  used  in input  and  halp  to  do  validtion
   const { register, handleSubmit } = useForm({});
 
-  const registerForm = async (values) => {
+  const loginForm = async (values) => {
     console.log(values);
     try {
       const response = await axios.post(
@@ -29,7 +34,7 @@ function Login() {
       <Typography variant="h3"> Login Page</Typography>
 
       <Box
-        onSubmit={handleSubmit(registerForm)}
+        onSubmit={handleSubmit(loginForm)}
         component={"form"}
         sx={{
           display: "flex",
@@ -51,10 +56,10 @@ function Login() {
           fullWidth
           variant="outlined"
         />
-
-        <Button variant="contained" type="submit">
-          Login
-        </Button>
+       <Box  display={'flex'}  gap={2}>
+        <Button variant="contained" type="submit"> Login </Button>
+        <Link  sx={{ border:1, padding:1, textTransform:'capitalize' }} component={RouterLink} to='/SendCode' color='inherit'  underline='none' > Resend  password</Link>
+        </Box>
       </Box>
     </Box>
   );
