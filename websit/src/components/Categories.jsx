@@ -2,9 +2,14 @@ import { useEffect } from 'react'
 import React, { useState } from 'react'
 import axioInstance from '../API/axiosInstance'
 import { Box, Grid, Typography, Card } from '@mui/material';
+import { useQuery } from '@tanstack/react-query';
 
 function Categories() {
   const [categories, setCategories] = useState([]);
+  const {}=useQuery({
+    queryKey:['categories'],
+    
+  })
   const getCategories = async () => {
     try {
       const response = await axioInstance.get(`/Categories`);
