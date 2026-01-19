@@ -8,7 +8,7 @@ import RestPassword from "../resetPassword/RestPassword";
 import {Link as RouterLink} from 'react-router-dom'
 
 
-
+//  islam  add  the validation if  the  user  inter  shomting  wrong  
 function Login() {
   //  form  hook  used  in input  and  halp  to  do  validtion
   const { register, handleSubmit } = useForm({});
@@ -36,7 +36,7 @@ function Login() {
         <TextField   {...register("password")}  label="Password"   fullWidth  variant="outlined"   />
        <Box  display={'flex'}  gap={2}>
         <Button variant="contained" type="submit"> Login </Button>
-        <Link  sx={{ border:1, padding:1, textTransform:'capitalize' }} component={RouterLink} to='/SendCode' color='inherit'  underline='none' > Resend  password</Link>
+        <Link  sx={{ border:1, padding:1, textTransform:'capitalize' }} component={RouterLink} to='/SendCode' color='inherit'  underline='none' > Forgit Password?</Link>
         </Box>
       </Box>
     </Box>

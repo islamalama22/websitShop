@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Box, TextField, Typography, Button, CircularProgress } from '@mui/material' 
+import { Box, TextField, Typography, Button, CircularProgress, capitalize } from '@mui/material' 
 import Alert from '@mui/material/Alert';
  
 // hooks 
@@ -9,6 +9,8 @@ import axios from 'axios'
 import RegisterSchema from '../../validations/RegisterSchema'
 //  to  show the  errors  of schema
 import { yupResolver } from '@hookform/resolvers/yup';
+// axiose instnce  used to  do  settings to  requst 
+import axiosInstance from '../../API/axiosInstance';
 
 
 
@@ -33,7 +35,7 @@ function Register() {
   const registerForm = async(values) => {
     console.log(values);
     try {
-      const response=await axios.post(`https://knowledgeshop.runasp.net/api/Auth/Account/Register`,values);
+      const response=await axiosInstance.post(`/Auth/Account/Register`,values);
       //  it  will  returen  status 201 :  added data   susccfully    ,   200 :  succfully 
       console.log(response);
       if(response.status==201){
@@ -56,6 +58,7 @@ function Register() {
     <>
 
     <Box>
+     {/* this is server error handling */}
      {successful && ( <Alert severity="success">{successful} </Alert>)}
      { (serverError) && ( <Alert severity="error">{serverError} </Alert>)}
 
@@ -79,8 +82,10 @@ function Register() {
         <TextField {...register('phoneNumber')} label="Phone  Number" fullWidth variant='outlined' 
         error={errors.phoneNumber} helperText={errors.phoneNumber?.message}
         />
+       
 
         <Button variant="contained" type="submit" disabled={isSubmitting}>
+        {/* this loader  */}
           {isSubmitting ? <CircularProgress /> :'register'}
          </Button>
 
