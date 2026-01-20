@@ -1,0 +1,30 @@
+import { useQuery } from "@tanstack/react-query";
+import axiosInstance from "../API/axiosInstance";
+
+export default function useCategories(){
+      const fetchCategories=async()=>{
+     const response = await axiosInstance.get(`/Categories`);
+     console.log(response.data.response);
+      return response.data.response;
+    
+  }
+//  when ued  the  react  qurty  no  need  for  used  starte  and  effect 
+//  this  code  is from react  quary  
+//  mean  :  from th  api  get  the  data  and  store  it  in local brower
+//  store  it  in local  strorge  with name  category  
+
+const query=useQuery({
+    queryKey:['categories'],
+    //  the  data  in  cash is  : 
+    //  1-  fresh  :  new
+    //  2-  stale  :  old 
+    //  5 min  in  mill/secands 
+    // when i  add data  to  chash  to  5  min  i  make  the  ( requstes less  & and  if  the  user enterint  is slow  its  effisent )
+    staleTime: 5*60*1000, //  after  5  mint  will  send  a new requset  
+    queryFn:fetchCategories
+  })
+
+  return query;
+     
+
+}
