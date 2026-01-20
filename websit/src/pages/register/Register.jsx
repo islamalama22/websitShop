@@ -9,8 +9,7 @@ import axios from 'axios'
 import RegisterSchema from '../../validations/RegisterSchema'
 //  to  show the  errors  of schema
 import { yupResolver } from '@hookform/resolvers/yup';
-// axiose instnce  used to  do  settings to  requst 
-import axiosInstance from '../../API/axiosInstance';
+import useRegister from '../../hooks/useRegister';
 
 
 
@@ -18,11 +17,8 @@ import axiosInstance from '../../API/axiosInstance';
 
 
 function Register() {
-  //  errors from  the  backend like  the  id  is  taken  and  username  is taken  
-  const [serverError,setServerErrors]=useState(null);
-  const [successful,setSuccessful]=useState(null);
-
-
+ 
+  const {serverError,registerMutation,successful}=useRegister();
   //  form  hook  used  in input  and  halp  to  do  validtion
   //  resolver  its  in  each  send to  values  chaek  the  values 
   // resolver  ://  it  will  provent  the  clinet  to  send  requst  befor  chaek  the  inputs
@@ -33,24 +29,7 @@ function Register() {
     mode:"onBlur"});
 
   const registerForm = async(values) => {
-    console.log(values);
-    try {
-      const response=await axiosInstance.post(`/Auth/Account/Register`,values);
-      //  it  will  returen  status 201 :  added data   susccfully    ,   200 :  succfully 
-      console.log(response);
-      if(response.status==201){
-        setSuccessful(response.data?.data?.message || response.data?.message || "User registered successfully");
-        setServerErrors(null);
-        reset();
-      }
-    } catch (err) {
-      if(err.response?.status==400){
-        console.log(err.response.data.errors);
-        setServerErrors(err.response.data?.errors);
-        setSuccessful(null);
-
-      }
-   }
+   await  registerMutation.mutateAsync(values);
 
   }
   return (
