@@ -1,24 +1,31 @@
-import React from "react";
+import React, { useContext } from "react";
 // hooks
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { Box, Typography, TextField, Button, Link } from "@mui/material";
 import RestPassword from "../resetPassword/RestPassword";
 //  the  Linke of  routing 
-import {Link as RouterLink} from 'react-router-dom'
+import {Navigate, Link as RouterLink, useNavigate} from 'react-router-dom'
+import { AuthContext } from "../../context/AuthContext";
 
 
 //  islam  add  the validation if  the  user  inter  shomting  wrong  
 function Login() {
   //  form  hook  used  in input  and  halp  to  do  validtion
   const { register, handleSubmit } = useForm({});
+  const navigate=useNavigate();
+  //  to  use  the  token from another  compoenet (context)
+   const {setToken,setAcessToken}=useContext(AuthContext);
 
   const loginForm = async (values) => {
     console.log(values);
     try {
       const response = await axios.post(`https://knowledgeshop.runasp.net/api/Auth/Account/login`, values);
       if (response.status === 200) {
-        localStorage.setItem("token", response.data.accessToken);
+        //  from  context 
+        setToken("token", response.data.accessToken);
+        setAcessToken(response.data.accessToken) ;
+        navigate('/home');
       }
       //  it  will  returen  status 201 :  added data   susccfully    ,   200 :  succfully
       console.log(response);
