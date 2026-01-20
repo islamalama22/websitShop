@@ -4,8 +4,11 @@ import axioInstance from '../API/axiosInstance'
 import { Box, Grid, Typography, Card, CircularProgress } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import useCategories from '../hooks/useCategories'
+import { useOutletContext } from 'react-router-dom';
 
 function Categories() {
+
+  //  the  data  commes  from anoter  component  using  context  
    const {isLoading,isError,data}=useCategories();
 
   if(isLoading) return <> <CircularProgress>  </CircularProgress>  </>
@@ -16,7 +19,7 @@ function Categories() {
   return (
     <>
       <Box p={3} >
-        <Typography component={'h2'} variant="h4">  Categories</Typography>
+        <Typography component={'h2'} variant="h4">  Categories </Typography>
       </Box>
       {
         <container>

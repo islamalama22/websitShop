@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Navbar from '../components/navbar/Navbar'
 import Footer from '../components/footer/Footer'
 import { Outlet } from 'react-router-dom'
@@ -8,8 +8,8 @@ import { Outlet } from 'react-router-dom'
 function MainLayout() {
   return (
     <>
-  <Navbar/>
-   <Outlet/>
+  <Navbar />
+   <Outlet />
   <Footer/>
     </>
   )
