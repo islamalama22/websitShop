@@ -9,9 +9,15 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from '@mui/material';
 import {Link as RouterLink, useNavigate} from 'react-router-dom'    
 import { AuthContext } from '../../context/AuthContext';
+import useAuthStore from '../../store/authStore';
 function Navbar() {
-  const {token,logout}=useContext(AuthContext);
 
+  //  the  token using  context 
+ // const {token,logout}=useContext(AuthContext);
+
+
+ //  using  the zustand
+ const {token}=useAuthStore();
   const navigate=useNavigate();
   
   //  

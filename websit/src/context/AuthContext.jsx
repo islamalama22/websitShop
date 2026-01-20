@@ -1,3 +1,4 @@
+/*  in all  the  projsct  will  not  used  its chanaged  to  zustand
 import React, { useState } from 'react'
 import { createContext } from 'react'
 
@@ -29,3 +30,4 @@ export default function AuthContextProvider({children}) {
   )
 }
 
+*/
