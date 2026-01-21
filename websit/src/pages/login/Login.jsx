@@ -5,6 +5,7 @@ import axios from "axios";
 import { Box, Typography, TextField, Button, Link } from "@mui/material";
 //  the  Linke of  routing 
 import {Navigate, Link as RouterLink, useNavigate} from 'react-router-dom'
+import useAuthStore from "../../store/authStore";
 
 
 //  islam  add  the validation if  the  user  inter  shomting  wrong  
@@ -15,6 +16,11 @@ function Login() {
   //  to  use  the  token from another  compoenet (context), will not  used
    // const {setToken,setAcessToken}=useContext(AuthContext);
 
+
+
+   ////////////////////
+   const setToken=useAuthStore((state)=>state.setToken);
+   //////////////////////
   const loginForm = async (values) => {
     console.log(values);
     try {
@@ -23,6 +29,10 @@ function Login() {
         //  from  context 
        // setToken("token", response.data.accessToken);
        // setAcessToken(response.data.accessToken) ;
+
+       setToken(response.data.accessToken);
+
+
         navigate('/home');
       }
       //  it  will  returen  status 201 :  added data   susccfully    ,   200 :  succfully
