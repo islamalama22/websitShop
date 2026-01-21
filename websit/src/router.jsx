@@ -7,6 +7,7 @@ import Login from "./pages/login/Login.jsx";
 import Register from "./pages/register/Register.jsx";
 import RestPassword from './pages/resetPassword/RestPassword.jsx'
 import SendCode from "./pages/sendCode/SendCode.jsx";
+import ProdtectedRouter from "./ProdtectedRouter.jsx";
 
 const router = createBrowserRouter([
   {
@@ -19,9 +20,11 @@ const router = createBrowserRouter([
       },
       {
         path: "cart",
+        element:<ProdtectedRouter><cart/>   </ProdtectedRouter>
+
+
+
         //  user  context  provider  to  allow the  cart  to  use  the  cotext  values 
-        element: <cart/>
-        //  will  note used  
          // <UserContextProvider><Cart /> </UserContextProvider>
 ,
       }, {

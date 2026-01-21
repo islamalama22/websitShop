@@ -7,6 +7,11 @@ const useAuthStore=create((set)=>({
   setToken :(token)=>{
     localStorage.setItem("token", token);
     set({token:token}); 
+  },
+
+  logout:()=>{
+    localStorage.removeItem('token');
+    set({token:null});
   }
 
 }));

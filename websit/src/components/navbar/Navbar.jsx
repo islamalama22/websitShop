@@ -15,6 +15,7 @@ function Navbar() {
 
  //  using  the zustand
  const token=useAuthStore((state)=>state.token);
+ const logout=useAuthStore((state)=>state.logout)
   const navigate=useNavigate();
   
   //  
