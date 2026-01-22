@@ -21,7 +21,6 @@ function Categories() {
         <Typography component={'h2'} variant="h4">  Categories </Typography>
       </Box>
       {
-        <container>
           <Grid container spacing={2}>
             {data.map((categyory) =>
               <Grid p={4} textAlign={'center'} key={categyory.id} item size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
@@ -29,7 +28,6 @@ function Categories() {
               </Grid>
             )}
           </Grid>
-        </container>
       }
     </>
   )

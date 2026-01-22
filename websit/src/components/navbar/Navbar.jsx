@@ -15,7 +15,7 @@ function Navbar() {
 const user=useAuthStore((state)=>state.user);
 
   const navigate=useNavigate();
-
+  console.log(' user data :')
   console.log(user);
   
   //  

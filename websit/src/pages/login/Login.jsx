@@ -25,6 +25,7 @@ function Login() {
 
    //////////////////////
   const loginForm = async (values) => {
+    console.log('login data from  form :')
     console.log(values);
     try {
       const response = await axios.post(`https://knowledgeshop.runasp.net/api/Auth/Account/login`, values);
@@ -41,15 +42,18 @@ function Login() {
         role:decoded['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']
        }
 
-
+  
        setUser(user); 
+       console.log('login data  from  token  :')
        console.log(user);
        setToken(response.data.accessToken);
       navigate('/home');
       }
       //  it  will  returen  status 201 :  added data   susccfully    ,   200 :  succfully
+      console.log('Api  LOGIN  response:')
       console.log(response);
     } catch (err) {
+      console.log('Api  LOGIN  Error:')
       console.log(err);
     }
   };
