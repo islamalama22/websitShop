@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery ,QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import axiosInstance from '../API/axiosInstance';
 
 function useFetch(queryKey,url) {
