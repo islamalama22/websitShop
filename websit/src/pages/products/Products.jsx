@@ -2,6 +2,7 @@ import React from 'react'
 import { useProducts } from '../../hooks/useProducts'
 import { Card, CardContent, CardMedia, CircularProgress, Grid, Typography } from '@mui/material';
 import useFetch from '../../hooks/useFetch';
+import { Link } from 'react-router-dom';
 
 function Products() {
     const {isLoading,isError,data}=useProducts();
@@ -16,6 +17,7 @@ function Products() {
         <Grid  container spacing={4}  sx={{display:"flex" , flex:"nowarp" , alignContent:"space-between" , justifyContent:"center" ,alignItems:"center"}}>
             {data.response.data.map((product) =>
              <Grid  key={product.id} size={{xs:12,sm:6,md:5,lg:3}}>
+             <Link to={`/Products/${product.id}`}>
              <Card  >
                 <CardMedia component='img' image={product.image} alt={product.title}  sx={{objectFite:'contain', height:200 ,  }}></CardMedia>
                 <CardContent>
@@ -26,7 +28,7 @@ function Products() {
 
                 </CardContent>
              </Card>
-
+             </Link>
 
              </Grid>
             )}

@@ -8,6 +8,7 @@ import Register from "./pages/register/Register.jsx";
 import RestPassword from './pages/resetPassword/RestPassword.jsx'
 import SendCode from "./pages/sendCode/SendCode.jsx";
 import ProdtectedRouter from "./ProdtectedRouter.jsx";
+import Product from "./pages/products/Product.jsx";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,11 @@ const router = createBrowserRouter([
       }, {
         path: "login",
         element: <Login />,
+      },
+      {
+        path :"Products/:id",
+        element:<Product/>
+
       },
       {
         path: "register",

@@ -24,7 +24,7 @@ function Categories() {
           <Grid container spacing={2}>
             {data.response.map((categyory) =>
               <Grid p={4} textAlign={'center'} key={categyory.id}  size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
-                <Card > {categyory.id} </Card>
+                <Card > {categyory.name} </Card>
               </Grid>
             )}
           </Grid>
