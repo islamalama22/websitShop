@@ -6,4 +6,10 @@ const axiosInstance = axios.create({
  
 });
 
+//  configt  :  object  hold  all  the data  of  requst
+//  any  requse  will  send  will  send  in  eng  by  defult 
+axiosInstance.interceptors.request.use( (config)=>{
+  config.headers["Accept-Language"]='en'
+  return config;
+})
 export default axiosInstance
