@@ -1,7 +1,5 @@
-import React from 'react'
 import { useProducts } from '../../hooks/useProducts'
 import { Card, CardContent, CardMedia, CircularProgress, Grid, Typography } from '@mui/material';
-import useFetch from '../../hooks/useFetch';
 import { Link } from 'react-router-dom';
 
 function Products() {
