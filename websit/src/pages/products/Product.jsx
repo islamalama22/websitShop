@@ -10,10 +10,9 @@ function Product() {
 
     const {id}=useParams();
     const  {isLoading,isError,data}=useProduct(id);
-    console.log('product  detalis Api responce:')
-    const product=data.response;
-    console.log(data);
-
+    console.log('product  detalis Api responce:');
+    const product=data?.response;
+    console.log(product);
     if(isError ) return <Typography> error</Typography>
     if(isLoading) return <CircularProgress></CircularProgress>
 

@@ -1,9 +1,14 @@
+import useCart from "../../hooks/useCart"
 
 function Cart() {
+
+   const {data}=useCart();
+   console.log('data  of cart:')
+   console.log(data);
   return (
-    <div>
-      cart hiiii 
-    </div>
+    <>
+      123
+    </>
   )
 }
 

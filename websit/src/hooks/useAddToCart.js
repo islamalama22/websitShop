@@ -6,16 +6,18 @@ import axiosAuthInstance from '../API/axiosAuthInstance';
 function useAddToCart() {
     const  addToCartMuation=useMutation({
         mutationFn:async({ProductId,Count})=>{
-         return await axiosAuthInstance.post('/Carts'),{
-           ProductId,
-           Count
+         return await axiosAuthInstance.post('/Carts',{
+            ProductId,
+            Count,
 
-         }
-        }
-    })
+         });
+        },
 
-    return addToCartMuation
+   
+    });
 
+
+    return addToCartMuation;
 }
 
 export default useAddToCart

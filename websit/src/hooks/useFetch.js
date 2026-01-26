@@ -1,7 +1,13 @@
 import { useQuery ,QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import axiosInstance from '../API/axiosInstance';
 
-function useFetch(queryKey,url) {
+
+
+
+//  the axios  intsenece  beecuse there  is  two  instence  can  be  used  and  
+//  use  fetch  will  be  able to  handle  both of  axioseinstenc & axiosAuthInst
+
+function useFetch(queryKey,url,instance=axiosInstance) {
 
     //  when ued  the  react  qurty  no  need  for  used  starte  and  effect 
     //  this  code  is from react  quary  
@@ -9,7 +15,7 @@ function useFetch(queryKey,url) {
     //  store  it  in local  strorge  with name  category  
 
     const fetchData=async ()=>{
-        const response=await axiosInstance.get(url);
+        const response=await instance.get(url);
         console.log(' data  of  product:')
         console.log(response.data);
         return(response.data);
