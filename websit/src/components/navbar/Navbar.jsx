@@ -36,7 +36,7 @@ const user=useAuthStore((state)=>state.user);
             { token!=null ?
             <>
             <Typography textAlign={'center'} textTransform={'capitalize'}> welcom {user?.name}</Typography>
-            <Link component={RouterLink} textTransform={'capitalize'} to='/cart' color='inherit' underline='none' > cart</Link>
+            <Link component={RouterLink} textTransform={'capitalize'} to='/Cart' color='inherit' underline='none' > cart</Link>
             <Button   color='inherit'   onClick={handleLogout} > logout</Button>
 
             </> : 
