@@ -1,6 +1,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { RouterProvider } from "react-router-dom";
 import router from "./router";
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 const queryClient = new QueryClient();
 
@@ -11,6 +12,9 @@ function App() {
     <QueryClientProvider client={queryClient}>
      {/*  the  authcontrxt  provider  any  component  in  the  all  project  will  access  the  varib */}
      { /*<AuthContextProvider>        its not  used  will  used  zustand    */}
+
+
+        <ReactQueryDevtools initialIsOpen={false} />
         <RouterProvider router={router} />
      { /*<AuthContextProvider> */}
     </QueryClientProvider>

@@ -27,7 +27,7 @@ function useFetch(queryKey,url,instance=axiosInstance) {
     //  5 min  in  mill/secands 
     // when i  add data  to  chash  to  5  min  i  make  the  ( requstes less  & and  if  the  user enterint  is slow  its  effisent )
    const quary=useQuery({
-        queryKey:[queryKey],
+        queryKey:queryKey,
         queryFn:fetchData,
         staleTime:5*60*1000
     })
