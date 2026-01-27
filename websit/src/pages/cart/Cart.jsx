@@ -8,12 +8,17 @@ import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import TableRow from "@mui/material/TableRow";
 import Button from "@mui/material/Button";
+import useRemoveFromCart from "../../hooks/useRemoveFromCart";
 
 function Cart() {
 
    const {data,isLoading,isError}=useCart();
    console.log('data  of cart:')
    console.log(data);
+
+   const {mutate:removeItem,isPending,isError:isErrorRemoveCart}=useRemoveFromCart();
+   console.log('Delete from  cart errro')
+   console.log(isErrorRemoveCart);
 
 
    if(isLoading) return <CircularProgress></CircularProgress>
@@ -34,13 +39,16 @@ function Cart() {
            <TableBody>
             {data.items.map(item=>(
 
-              <TableRow key={item.id}>
+              <TableRow key={item.productId}>
                   <TableCell>{item.productName}</TableCell>
                   <TableCell>{item.price}</TableCell>
                   <TableCell>{item.count}</TableCell>
                   <TableCell>{item.totalPrice}</TableCell>
                   <TableCell>
-                    <Button color="error" variant="contained">remove</Button>
+                    <Button color="error" variant="contained"
+                     onClick={()=>removeItem(item.productId)}
+                     disabled={isPending}
+                    >remove</Button>
 
                   </TableCell>
 
