@@ -16,9 +16,12 @@ import useUpdateCartItem from "../../hooks/useUpdateCartItem";
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import IconButton from "@mui/material/IconButton";
+import { useNavigate } from "react-router-dom";
 
  
 function Cart() {
+
+  const navigate=useNavigate();
 
    const {data,isLoading,isError}=useCart();
    console.log('data  of cart:')
@@ -97,6 +100,12 @@ function Cart() {
           </TableBody>
         </Table>
       </TableContainer>
+
+      <Box sx={{padding:3 , display:"flex", gap:2}}>
+        <Button variant="contained" color="success" onClick={()=>navigate('/checkout')}  > proceed to  checkout </Button>
+        <Button variant="contained" color="primary"  onClick={()=>navigate('/home')} > continue  shopping </Button>
+
+      </Box>
     </>
   );
 }
