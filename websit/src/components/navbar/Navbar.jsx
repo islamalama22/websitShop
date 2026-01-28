@@ -4,10 +4,13 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
-import { Link } from '@mui/material';
+import { ButtonBase, Link } from '@mui/material';
 import {Link as RouterLink, useNavigate} from 'react-router-dom'    
 import useAuthStore from '../../store/authStore';
+import { useTranslation } from 'react-i18next';
 function Navbar() {
+
+ const {t,i18n}=useTranslation();
 
  //  using  the zustand
  const token=useAuthStore((state)=>state.token);
@@ -18,7 +21,12 @@ const user=useAuthStore((state)=>state.user);
   console.log(' user data :')
   console.log(user);
   
-  //  
+  
+ const toggleLanguge = () => {
+    const newLng=i18n.language==='ar'?'en':'ar';
+    i18n.changeLanguage(newLng);
+  }
+
   const  handleLogout=()=>{
     logout();
     navigate('/login');
@@ -29,27 +37,28 @@ const user=useAuthStore((state)=>state.user);
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            <Link component={RouterLink} to='/home' color='inherit' underline='none' > HOME </Link>
+            <Link component={RouterLink} to='/home' color='inherit' underline='none' > {t('Home')} </Link>
           </Typography>
 
           <Box sx={{display:'flex', gap:2 ,alignItems:'center'}}>
             { token!=null ?
             <>
-            <Typography textAlign={'center'} textTransform={'capitalize'}> welcom {user?.name}</Typography>
-            <Link component={RouterLink} textTransform={'capitalize'} to='/Cart' color='inherit' underline='none' > cart</Link>
-            <Button   color='inherit'   onClick={handleLogout} > logout</Button>
+            <Typography textAlign={'center'} textTransform={'capitalize'}> {t('wlc')}   {user?.name}</Typography>
+            <Link component={RouterLink} textTransform={'capitalize'} to='/Cart' color='inherit' underline='none' > {t('cart')}</Link>
+            <Button   color='inherit'   onClick={handleLogout} > {t('logout')}</Button>
 
             </> : 
             
             <>
-            <Link component={RouterLink} to='/register'  color='inherit' underline='none'> register</Link>
-            <Link  component={RouterLink} to='/login' color='inherit' underline='none' > login</Link>
+            <Link component={RouterLink} to='/register'  color='inherit' underline='none'> {t('register')}</Link>
+            <Link  component={RouterLink} to='/login' color='inherit' underline='none' > {t('login')}</Link>
 
             </>
             
             }
-          
-          </Box>
+              <Button  color='inherit' onClick={ toggleLanguge }> {i18n.language==="ar"? 'En':'ع'}</Button>
+
+                 </Box>
         </Toolbar>
       </AppBar>
     </Box>

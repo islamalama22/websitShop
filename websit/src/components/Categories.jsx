@@ -1,14 +1,19 @@
-import { useEffect } from 'react'
+import { useEffect, useTransition } from 'react'
 import React, { useState } from 'react'
 import axioInstance from '../API/axiosInstance'
 import { Box, Grid, Typography, Card, CircularProgress } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import useCategories from '../hooks/useCategories'
+import { useTranslation } from 'react-i18next';
 
 function Categories() {
 
+  //  languge
+  const {t}=useTranslation();
+
   //  the  data  commes  from anoter  component  using  context  
    const {isLoading,isError,data}=useCategories();
+
 
   if(isLoading) return <> <CircularProgress>  </CircularProgress>  </>
   if(isError) return <>
@@ -18,7 +23,7 @@ function Categories() {
   return (
     <>
       <Box p={3} >
-        <Typography component={'h2'} variant="h4">  Categories </Typography>
+        <Typography component={'h2'} variant="h4">  {t('categories')} </Typography>
       </Box>
       {
           <Grid container spacing={2}>
