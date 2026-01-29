@@ -10,7 +10,6 @@ const getTheme=(mode)=>{
         mode:mode,
         primary:{
         main:'rgba(235, 222, 222, 0.53)',
-        
 
         }
 

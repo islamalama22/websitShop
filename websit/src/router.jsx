@@ -10,6 +10,9 @@ import SendCode from "./pages/sendCode/SendCode.jsx";
 import ProdtectedRouter from "./ProdtectedRouter.jsx";
 import Product from "./pages/products/Product.jsx";
 import Checkout from "./pages/cheakout/Checkout.jsx";
+import ProfileLayout from "./pages/profile/ProfileLayout.jsx";
+import ProfileOrders from "./pages/profile/ProfileOrders.jsx";
+import ProfileInfo from "./pages/profile/ProfileInfo.jsx";
 
 const router = createBrowserRouter([
   {
@@ -17,7 +20,7 @@ const router = createBrowserRouter([
     element: <MainLayout />,
     children: [
       {
-        path: "home",
+        index:true,
         element: <Home />,
       },
       {
@@ -39,6 +42,18 @@ const router = createBrowserRouter([
       },{
         path:'checkout',
         element:<Checkout/>
+      },{
+          path :"Profile",
+          element:<ProfileLayout/>,
+          children:[
+            {
+              index:true,
+              element:<ProfileInfo/>
+            },{
+              path:'orders',
+              element:<ProfileOrders/>
+            }
+          ]
       },
       {
         path: "register",

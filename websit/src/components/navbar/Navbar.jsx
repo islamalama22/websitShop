@@ -49,6 +49,7 @@ const user=useAuthStore((state)=>state.user);
             <Typography textAlign={'center'} textTransform={'capitalize'}> {t('wlc')}   {user?.name}</Typography>
             <Link component={RouterLink} textTransform={'capitalize'} to='/Cart' color='inherit' underline='none' > {t('cart')}</Link>
             <Button   color='inherit'   onClick={handleLogout} > {t('logout')}</Button>
+            <Link component={RouterLink} textTransform={'capitalize'} to='/Profile' color='inherit' underline='none' > Profile</Link>
 
             </> : 
             
