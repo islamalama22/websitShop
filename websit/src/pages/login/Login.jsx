@@ -7,6 +7,7 @@ import { Box, Typography, TextField, Button, Link } from "@mui/material";
 import {Navigate, Link as RouterLink, useNavigate} from 'react-router-dom'
 import useAuthStore from "../../store/authStore";
 import {jwtDecode} from 'jwt-decode'
+import axiosInstance from '../../API/axiosInstance';
 
 
 //  islam  add  the validation if  the  user  inter  shomting  wrong  
@@ -28,7 +29,7 @@ function Login() {
     console.log('login data from  form :')
     console.log(values);
     try {
-      const response = await axios.post(`https://knowledgeshop.runasp.net/api/Auth/Account/login`, values);
+      const response = await axiosInstance.post(`/Auth/Account/login`, values);
       if (response.status === 200) {
         //  from  context 
        // setToken("token", response.data.accessToken);
