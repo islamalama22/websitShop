@@ -47,7 +47,7 @@ function Login() {
        console.log('login data  from  token  :')
        console.log(user);
        setToken(response.data.accessToken);
-      navigate('/home');
+      navigate('/');
       }
       //  it  will  returen  status 201 :  added data   susccfully    ,   200 :  succfully
       console.log('Api  LOGIN  response:')
