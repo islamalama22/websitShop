@@ -8,6 +8,7 @@ import { ButtonBase, Link } from '@mui/material';
 import {Link as RouterLink, useNavigate} from 'react-router-dom'    
 import useAuthStore from '../../store/authStore';
 import { useTranslation } from 'react-i18next';
+import useThemeStore from '../../store/useThemeStore';
 function Navbar() {
 
  const {t,i18n}=useTranslation();
@@ -26,6 +27,8 @@ const user=useAuthStore((state)=>state.user);
     const newLng=i18n.language==='ar'?'en':'ar';
     i18n.changeLanguage(newLng);
   }
+
+  const {mode,toggleTheme}=useThemeStore();
 
   const  handleLogout=()=>{
     logout();
@@ -57,6 +60,7 @@ const user=useAuthStore((state)=>state.user);
             
             }
               <Button  color='inherit' onClick={ toggleLanguge }> {i18n.language==="ar"? 'En':'ع'}</Button>
+              <Button  color='inherit' onClick={ toggleTheme }> {mode==='dark'?'Light':'Dark'}</Button>
 
                  </Box>
         </Toolbar>

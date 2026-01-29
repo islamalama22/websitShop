@@ -3,21 +3,26 @@ import { RouterProvider } from "react-router-dom";
 import router from "./router";
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import LanguageManeger from '../src/utils/LangugeManager';
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import useThemeStore from "./store/useThemeStore";
+import getTheme from "./theme";
 
 const queryClient = new QueryClient();
 
+
 function App() {
+  
+const mode=useThemeStore((state) =>state.mode);
+const theme=getTheme(mode);
+
   return (
-
-    //  the  quryclineprovider  its allow  use  the  cash  from react  quary 
     <QueryClientProvider client={queryClient}>
-     {/*  the  authcontrxt  provider  any  component  in  the  all  project  will  access  the  varib */}
-     { /*<AuthContextProvider>        its not  used  will  used  zustand    */}
-
-   <LanguageManeger/>
+        <LanguageManeger/>
         <ReactQueryDevtools initialIsOpen={false} />
-        <RouterProvider router={router} />
-     { /*<AuthContextProvider> */}
+              <ThemeProvider theme={theme}>
+                    <CssBaseline/>
+                    <RouterProvider router={router} />
+              </ThemeProvider>
     </QueryClientProvider>
   );
 }
