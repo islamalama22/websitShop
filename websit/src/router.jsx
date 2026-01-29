@@ -13,6 +13,7 @@ import Checkout from "./pages/cheakout/Checkout.jsx";
 import ProfileLayout from "./pages/profile/ProfileLayout.jsx";
 import ProfileOrders from "./pages/profile/ProfileOrders.jsx";
 import ProfileInfo from "./pages/profile/ProfileInfo.jsx";
+import Products from "./pages/products/Products.jsx";
 
 const router = createBrowserRouter([
   {
@@ -21,7 +22,7 @@ const router = createBrowserRouter([
     children: [
       {
         index:true,
-        element: <Home />,
+        element: <Home/>,
       },
       {
         path: "Cart",
@@ -34,6 +35,9 @@ const router = createBrowserRouter([
       }, {
         path: "login",
         element: <Login />,
+      },{
+       path :"products",
+       element:<Products/>
       },
       {
         path :"Products/:id",

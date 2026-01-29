@@ -4,7 +4,7 @@ import { Typography ,Link, Box } from '@mui/material'
 //  import  css file 
 import styles from './home.module.css'
 import Categories from '../../components/Categories';
-import Products from '../products/Products';
+import ProductsSection from '../products/ProductsSection';
 
 
 
@@ -12,7 +12,7 @@ function Home() {
   return (
    <>
     <Categories/>
-    <Products/>
+    <ProductsSection/>
    </>
   );
 }

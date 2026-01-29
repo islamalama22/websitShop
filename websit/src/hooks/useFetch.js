@@ -7,7 +7,7 @@ import axiosInstance from '../API/axiosInstance';
 //  the axios  intsenece  beecuse there  is  two  instence  can  be  used  and  
 //  use  fetch  will  be  able to  handle  both of  axioseinstenc & axiosAuthInst
 
-function useFetch(queryKey,url,instance=axiosInstance) {
+function useFetch(queryKey,url,params={},instance=axiosInstance) {
 
     //  when ued  the  react  qurty  no  need  for  used  starte  and  effect 
     //  this  code  is from react  quary  
@@ -15,7 +15,7 @@ function useFetch(queryKey,url,instance=axiosInstance) {
     //  store  it  in local  strorge  with name  category  
 
     const fetchData=async ()=>{
-        const response=await instance.get(url);
+        const response=await instance.get(url,{params});
         console.log(' data  of  product:')
         console.log(response.data);
         return(response.data);
