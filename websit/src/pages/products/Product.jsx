@@ -10,9 +10,12 @@ function Product() {
 
     const {id}=useParams();
     const  {isLoading,isError,data}=useProduct(id);
-    console.log('product  detalis Api responce:');
     const product=data?.response;
-    console.log(product);
+    const reviwes=product.reviews;
+
+   console.log(' one  product  detalis Api:',product);
+    console.log(' product  reviwes ',reviwes);
+
     if(isError ) return <Typography> error</Typography>
     if(isLoading) return <CircularProgress></CircularProgress>
 
@@ -45,6 +48,21 @@ function Product() {
      </Card>
 
     </Box>
+
+    <Box component={'section'}    sx={{display:'flex' ,flexDirection:'column' ,padding:2,gap:2}}  >
+    <Typography variant='h6'> users  reviwes</Typography>
+           {reviwes.map((reviwe)=>
+             <Box component={'div'}   sx={{ padding:1.5, border:1 ,borderColor:'rgb(186, 186, 181)'  , borderRadius:1,  }} >
+                 <Typography sx={{fontSize:'0.9rem',textTransform:'capitalize' }}> {reviwe.userName}</Typography>
+                    <Box sx={{display:"flex" , justifyContent:'space-between'}}>
+                        <Typography sx={{fontSize:'0.7rem'}}> {reviwe.comment} </Typography>
+                        <Rating value={Number(reviwe.rating)}> </Rating>
+                    </Box>
+             </Box>
+           
+           )}
+    </Box>
+
    </>
   )
 }

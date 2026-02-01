@@ -7,7 +7,9 @@ import { useForm } from 'react-hook-form';
 import {Box}  from '@mui/material'
 
 export default function Products() {
+
     const {t}=useTranslation();
+    /////////////  Filter  ///////////////////// 
     const {register,handleSubmit}=useForm({
         defaultValues:{
             search:"",
@@ -18,7 +20,6 @@ export default function Products() {
     })
 
     const [activeFilters,setActiveFilters]=useState({});
-
     const {isLoading,isError,data}=useProducts(activeFilters);
     const applyFilters=(values)=>{
         setActiveFilters({
@@ -30,7 +31,8 @@ export default function Products() {
 
         })
     }
-    console.log('product  array:')
+
+    console.log('products page from api usePrdoducts:')
     console.log(data);
     if(isLoading) return<CircularProgress></CircularProgress>
     if(isError) return <Typography > error </Typography>

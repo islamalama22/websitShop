@@ -27,11 +27,6 @@ const router = createBrowserRouter([
       {
         path: "Cart",
         element:<ProdtectedRouter><Cart />   </ProdtectedRouter>
-
-
-
-        //  user  context  provider  to  allow the  cart  to  use  the  cotext  values 
-         // <UserContextProvider><Cart /> </UserContextProvider>
       }, {
         path: "login",
         element: <Login />,
@@ -56,7 +51,7 @@ const router = createBrowserRouter([
             },{
               path:'orders',
               element:<ProfileOrders/>
-            }
+            },
           ]
       },
       {
