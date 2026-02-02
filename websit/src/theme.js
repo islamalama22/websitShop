@@ -6,9 +6,10 @@ const getTheme=(mode)=>{
     palette:{
         mode:mode,
         primary:{
-        main:'rgba(235, 222, 222, 0.53)',
-
+        main:'rgba(192, 57, 57, 0.53)',
+        borderColor:"rgba(245, 244, 244, 0.53)",   
         }
+
     }
 })
 }

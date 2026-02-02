@@ -13,6 +13,7 @@ function useFetch(queryKey,url,params={},instance=axiosInstance) {
     //  this  code  is from react  quary  
     //  mean  :  from th  api  get  the  data  and  store  it  in local brower
     //  store  it  in local  strorge  with name  category  
+    //  params  it  for  the filter  
 
     const fetchData=async ()=>{
         const response=await instance.get(url,{params});
