@@ -3,8 +3,7 @@ import useFetch from './useFetch'
 import axiosAuthInstance from '../API/axiosAuthInstance'
  
  function useProfile() {
-    //  cash  store  ,  api  ,  axiose  type
-
+    //  cash  store  ,  api  ,  axiose  type 
    return useFetch(['profile'],'/Profile',{},axiosAuthInstance);
  }
  

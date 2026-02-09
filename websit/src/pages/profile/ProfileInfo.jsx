@@ -1,40 +1,59 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import useProfile from '../../hooks/useProfile'
-import { Box, Button, CircularProgress, InputLabel, TextField, Typography } from '@mui/material';
+import { Input,InputAdornment,FormControl,Box, Button, CircularProgress, InputLabel, TextField, Typography } from '@mui/material';
 import AccountCircle from '@mui/icons-material/AccountCircle';
+import { useForm } from 'react-hook-form';
+import useUpdateProfile from '../../hooks/useUpdateProfile';
 
 
 export default function ProfileInfo() {
+  
+   const {data,isError:isErrorGetPrfile, isPending:isPendingGetPrfile}=useProfile();
 
- const {data,isError,isPending}=useProfile();
- console.log('the profile api data',data);
-  if(isError) return <Typography>isError</Typography>
- if(isPending) return <CircularProgress></CircularProgress>
+   console.log(`user  data  from useProfile:`,data );
 
-  return (
-    <>
-    <Typography variant='h3' sx={{padding:1,fontSize:'2.5rem'}}> user Information </Typography>
-    <Box  variant="contained" sx={{padding:3, borderColor:'#e7e4e4', border:1 ,fontSize:'2rem' }}>
-       <Box sx={{color:'#000', display: 'flex', alignItems: 'flex-end' }}>
-        <InputLabel sx={{textTransform:'capitalize' ,color:'#000', pr:6 }}> full  name </InputLabel>
-        <AccountCircle sx={{  mr: 1, my: 0.5 }} />
-        <TextField id="input-with-sx"  value={data.fullName} variant="standard" />
-      </Box>
-        <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-        <InputLabel sx={{textTransform:'capitalize' ,color:'#000', pr:6 }}> Email </InputLabel>
-        <TextField id="input-with-sx"  value={data.email} variant="standard" />
-      </Box> 
-       <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-        <InputLabel sx={{textTransform:'capitalize' , color:'#000',pr:6 }}> Phone Number </InputLabel>
-        <TextField id="input-with-sx"  value={data.phoneNumber} variant="standard" />
-      </Box>
-        <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-        <InputLabel sx={{textTransform:'capitalize' , pr:6 ,color:'#000' }}> City </InputLabel>
-        <TextField id="input-with-sx"  value={data.city} variant="standard" />
-      </Box>
-      <Button  variant="contained" sx={{color:'dark'}} > Edit Information</Button>
-    </Box>
+   const { register, handleSubmit,reset } = useForm();
+   const {mutate:updateProfile,isPending:isUpdating}=useUpdateProfile();
+ 
 
-    </>
-  )
+    //  reset 
+      useEffect(() => {
+      if (data) {
+        reset({
+          fullName: data.fullName,
+          email: data.email,
+          phoneNumber: data.phoneNumber,
+          city: data.city,
+        })
+      }
+    }, [data, reset])
+
+   
+   const onSubmit=(values)=>{
+    updateProfile(values)
+   }
+    
+
+    
+ return (<>
+     <Box component={'section'}>
+      <Typography variant='h4' sx={{textTransform:"capitalize" }}
+        
+        > User Information  </Typography>
+
+      <Box   component={"form"} onSubmit={handleSubmit(onSubmit)}  sx={{display:"flex" , flexDirection:"column"  ,gap:2 ,py:3}} >
+        
+        <TextField {...register("fullName")}      label="user name" variant='outlined' />
+        <TextField {...register("email")}         label="email"         variant='outlined' />
+        <TextField {...register("phoneNumber")}  label="phone number"   variant='outlined' />
+        <TextField {...register("city")}         label='city'           variant='outlined' />
+        <Box sx={{display:"flex",justifyContent:"center" }} >
+        <Button  sx={{border:1 ,backgroundColor:'indianred', color:'wheat'}}  type='submit' disabled={isUpdating}  > {isUpdating?'saving...':'edit'}</Button>
+        <Button  sx={{border:1 ,backgroundColor:'indianred', color:'wheat'}}  > chanage  email </Button>
+        <Button sx={{border:1 ,backgroundColor:'indianred', color:'wheat'}} > change  the password</Button>
+     
+        </Box>
+      </Box>
+     </Box>
+ </>)
 }
