@@ -4,6 +4,7 @@ import { Input,InputAdornment,FormControl,Box, Button, CircularProgress, InputLa
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { useForm } from 'react-hook-form';
 import useUpdateProfile from '../../hooks/useUpdateProfile';
+import useUpdateEmail from '../../hooks/useUpdateEmail';
 
 
 export default function ProfileInfo() {
@@ -12,9 +13,11 @@ export default function ProfileInfo() {
 
    console.log(`user  data  from useProfile:`,data );
 
-   const { register, handleSubmit,reset } = useForm();
+   const { register, handleSubmit,reset ,getValues } = useForm();
    const {mutate:updateProfile,isPending:isUpdating}=useUpdateProfile();
- 
+
+   const {mutate:updateEmail,isPending:isPendingUpdateEmail,isError:isErrorUpdateEmail}=useUpdateEmail();
+   console.log('error  of  change  the  email :',isErrorUpdateEmail);
 
     //  reset 
       useEffect(() => {
@@ -33,7 +36,12 @@ export default function ProfileInfo() {
     updateProfile(values)
    }
     
-
+   const handleChangeEmail=()=>{
+    const email=getValues("email");
+    updateEmail({newEmail:email});
+   }
+   
+  
     
  return (<>
      <Box component={'section'}>
@@ -41,19 +49,25 @@ export default function ProfileInfo() {
         
         > User Information  </Typography>
 
-      <Box   component={"form"} onSubmit={handleSubmit(onSubmit)}  sx={{display:"flex" , flexDirection:"column"  ,gap:2 ,py:3}} >
-        
+      <Box   component={"form"} onSubmit={handleSubmit(onSubmit)}  sx={{}} >  
+      <Box classname='userinfo' sx={{display:'flex' ,gap:10 , py:4}} >
+          <Box sx={{display:'flex',gap:1}}>
         <TextField {...register("fullName")}      label="user name" variant='outlined' />
-        <TextField {...register("email")}         label="email"         variant='outlined' />
         <TextField {...register("phoneNumber")}  label="phone number"   variant='outlined' />
         <TextField {...register("city")}         label='city'           variant='outlined' />
-        <Box sx={{display:"flex",justifyContent:"center" }} >
+          </Box>
         <Button  sx={{border:1 ,backgroundColor:'indianred', color:'wheat'}}  type='submit' disabled={isUpdating}  > {isUpdating?'saving...':'edit'}</Button>
-        <Button  sx={{border:1 ,backgroundColor:'indianred', color:'wheat'}}  > chanage  email </Button>
-        <Button sx={{border:1 ,backgroundColor:'indianred', color:'wheat'}} > change  the password</Button>
-     
-        </Box>
+
       </Box>
+
+      <Box classname='emailChange' sx={{display:'flex' ,gap:10 }}>
+          <TextField {...register("email")}   label="email"  variant='outlined' /> 
+          <Button  sx={{border:1 ,backgroundColor:'indianred', color:'wheat'}} onClick={handleChangeEmail}  disabled={isPendingUpdateEmail} > {isPendingUpdateEmail?'changing done':'cahange email'} </Button>
+      </Box>
+      </Box>
+      
+
+
      </Box>
  </>)
 }
