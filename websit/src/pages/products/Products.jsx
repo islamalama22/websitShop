@@ -13,7 +13,7 @@ export default function Products() {
     const {register,handleSubmit}=useForm({
         defaultValues:{
             search:"",
-            categoryId:"",
+            categoryId:"", 
             minPrice:"",
             maxPrice:""
         }

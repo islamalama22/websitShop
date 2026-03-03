@@ -32,7 +32,7 @@ axiosAuthInstance.interceptors.response.use((response)=>{
   console.log(error);
   const originalRequest=error.config;
   console.log(`error  recived  from  : `,originalRequest);
-  if(error.response.status===401 && !originalRequest._retry){
+  if(error.response && error.response.status===401 && !originalRequest._retry){
 
     originalRequest._retry=true; //  it  not  401  eand  exit  the  if
 

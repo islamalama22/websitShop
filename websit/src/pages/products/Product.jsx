@@ -3,15 +3,32 @@ import { useParams } from 'react-router-dom'
 import useProduct from '../../hooks/useProduct';
 import { Box, Button, Card, CardContent, CardMedia, CircularProgress, Grid, Rating, Typography } from '@mui/material';
 import useAddToCart from '../../hooks/useAddToCart';
+import useProfile from '../../hooks/useProfile';
+import AddReview from './AddReview';
 
 function Product() {
+     /////////////////////////// order  reviwe//////////
+    
+    const {data:userProfile}=useProfile(); 
+    console.log('user profile :',userProfile);
+    const orders=userProfile?.orders || [] ;
+
+    const  canReviwe=orders.some(
+        order=>order.status==='Approved'
+    );
+
+    console.log('can review ??? ', canReviwe);
+
+
+
+    ////////////////////// cart  /////////////////
 
    const {mutate:addToCart,isPending}=useAddToCart();
 
     const {id}=useParams();
     const  {isLoading,isError,data}=useProduct(id);
     const product=data?.response;
-    const reviwes=product.reviews;
+    const reviwes=product?.reviews;
 
    console.log(' one  product  detalis Api:',product);
     console.log(' product  reviwes ',reviwes);
@@ -19,9 +36,11 @@ function Product() {
     if(isError ) return <Typography> error</Typography>
     if(isLoading) return <CircularProgress></CircularProgress>
 
+   
 
       return (
    <>
+    
     <Box component={'section'}  sx={{padding:2}}>
      <Card  sx={{padding:3}}>
         <Grid sx={{display:"flex" , alignContent:"center" ,alignItems:"center" }} container spacing={3}>
@@ -51,6 +70,7 @@ function Product() {
 
     <Box component={'section'}    sx={{display:'flex' ,flexDirection:'column' ,padding:2,gap:2}}  >
     <Typography variant='h6'> users  reviwes</Typography>
+     <AddReview productId={id} />
            {reviwes.map((reviwe)=>
              <Box component={'div'}   sx={{ padding:1.5, border:1 ,borderColor:'rgb(186, 186, 181)'  , borderRadius:1,  }} >
                  <Typography sx={{fontSize:'0.9rem',textTransform:'capitalize' }}> {reviwe.userName}</Typography>
@@ -63,6 +83,9 @@ function Product() {
            )}
     </Box>
 
+   
+
+  
    </>
   )
 }

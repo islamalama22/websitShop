@@ -14,7 +14,13 @@ export default function ProfileOrders() {
     const {data ,isError,isLoading}=useProfile();
     const orders=data?.orders;
     console.log('Orders:',orders);
+
+
+    const canReview=orders.some(
+      order=>order.status=='Approved'
+    );
    
+    console.log(' can reviw:',canReview);
 
   return ( 
     <Box >
