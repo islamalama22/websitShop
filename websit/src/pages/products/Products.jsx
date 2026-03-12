@@ -49,7 +49,6 @@ export default function Products() {
      <Button   color='dark' type='submit'> apply  submit</Button>
       </Box>
 
-        <Typography component={'h2'} textTransform={'capitalize'} > products all filter page </Typography>
         <Grid  container spacing={4}  sx={{display:"flex" , flex:"nowarp" , alignContent:"space-between" , justifyContent:"center" ,alignItems:"center"}}>
             {data.response.data.map((product) =>
              <Grid  key={product.id} size={{xs:12,sm:6,md:5,lg:3}}>
